@@ -1,0 +1,19 @@
+name: soundcloud_dart
+description: A small wrapper around the soundcloud api written in Dart
+# version: 1.0.0
+# homepage: https://www.example.com
+# author: joshuarose <email@example.com>
+
+environment:
+  sdk: '>=2.1.0 <3.0.0'
+
+dependencies:
+  json_annotation: ^2.0.0
+  http: ^0.12.0+1
+
+#  path: ^1.4.1
+
+dev_dependencies:
+  test: ^1.0.0
+  build_runner: ^1.0.0
+  json_serializable: ^2.0.0
