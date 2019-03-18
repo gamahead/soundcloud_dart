@@ -1,8 +1,13 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'model.g.dart';
 
 typedef bool TrackFilter(Track t);
+
+final DateFormat _dateFormatter = new DateFormat("yyyy/MM/dd HH:MM:ss Z");
+DateTime _fromJson(String date) => _dateFormatter.parse(date);
+String _toJson(DateTime date) => _dateFormatter.format(date);
 
 @JsonSerializable()
 class AuthResponse {
@@ -58,7 +63,7 @@ class Track {
   int release_year;
   String license;
   String artwork_url;
-  String created_at;
+  @JsonKey(fromJson: _fromJson, toJson: _toJson) DateTime created_at;
   int bpm;
   String uri;
   int original_content_size;

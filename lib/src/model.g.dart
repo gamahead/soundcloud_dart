@@ -61,7 +61,9 @@ Track _$TrackFromJson(Map<String, dynamic> json) {
       json['release_year'] as int,
       json['license'] as String,
       json['artwork_url'] as String,
-      json['created_at'] as String,
+      json['created_at'] == null
+          ? null
+          : _fromJson(json['created_at'] as String),
       json['bpm'] as int,
       json['uri'] as String,
       json['original_content_size'] as int,
@@ -111,7 +113,8 @@ Map<String, dynamic> _$TrackToJson(Track instance) => <String, dynamic>{
       'release_year': instance.release_year,
       'license': instance.license,
       'artwork_url': instance.artwork_url,
-      'created_at': instance.created_at,
+      'created_at':
+          instance.created_at == null ? null : _toJson(instance.created_at),
       'bpm': instance.bpm,
       'uri': instance.uri,
       'original_content_size': instance.original_content_size,

@@ -10,6 +10,7 @@ environment:
 dependencies:
   json_annotation: ^2.0.0
   http: ^0.12.0+1
+  intl: ^0.15.7
 
 #  path: ^1.4.1
 
