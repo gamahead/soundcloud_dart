@@ -56,7 +56,7 @@ class SoundcloudClient {
     }
 
     Map<String, dynamic> queryParams = getClientQueryParamMap();
-    queryParams.addAll({'limit': limit});
+    queryParams['limit'] = limit.toString();
 
     Uri recentTracksUri = Uri.http(host, tracksPath, queryParams);
 
@@ -96,7 +96,7 @@ class SoundcloudClient {
   List<Track> _handleTracksResponse(http.Response response) {
     if (response.statusCode != 200) throw (_produceErrorMessage(response));
 
-    List<Map<String, dynamic>> tracks = json.decode(response.body);
+    List<dynamic> tracks = json.decode(response.body);
 
     return tracks.map((track) => new Track.fromJson(track)).toList();
   }
