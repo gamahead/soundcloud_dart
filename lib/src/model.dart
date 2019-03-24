@@ -6,7 +6,9 @@ part 'model.g.dart';
 typedef bool TrackFilter(Track t);
 
 final DateFormat _dateFormatter = new DateFormat("yyyy/MM/dd HH:mm:ss Z");
-DateTime _fromJson(String date) =>  _dateFormatter.parse(date);
+
+DateTime _fromJson(String date) => _dateFormatter.parse(date);
+
 String _toJson(DateTime date) => date.toUtc().toIso8601String();
 
 @JsonSerializable()
@@ -16,9 +18,11 @@ class AuthResponse {
   String scope;
   String refresh_token;
 
-  AuthResponse(this.access_token, this.expires_in, this.scope, this.refresh_token);
+  AuthResponse(
+      this.access_token, this.expires_in, this.scope, this.refresh_token);
 
-  factory AuthResponse.fromJson(Map<String, dynamic> json) => _$AuthResponseFromJson(json);
+  factory AuthResponse.fromJson(Map<String, dynamic> json) =>
+      _$AuthResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$AuthResponseToJson(this);
 }
@@ -63,7 +67,8 @@ class Track {
   int release_year;
   String license;
   String artwork_url;
-  @JsonKey(fromJson: _fromJson, toJson: _toJson) DateTime created_at;
+  @JsonKey(fromJson: _fromJson, toJson: _toJson)
+  DateTime created_at;
   int bpm;
   String uri;
   int original_content_size;
@@ -125,11 +130,9 @@ class Track {
   factory Track.fromJson(Map<String, dynamic> json) => _$TrackFromJson(json);
 
   Map<String, dynamic> toJson() => _$TrackToJson(this);
-  
-//  static String toJsonString(List<Track> tracks) {
-//    tracks
-//      .map((Track t) => t.toJson())
-//  }
+
+  static String toJsonString(List<Track> tracks) =>
+      tracks.map((Track t) => t.toJson().toString()).toList().toString();
 }
 
 @JsonSerializable()
@@ -143,8 +146,8 @@ class User {
   String permalink_url;
   int id;
 
-  User(this.username, this.permalink, this.avatar_url, this.kind, this.uri, this.last_modified, this.permalink_url,
-      this.id);
+  User(this.username, this.permalink, this.avatar_url, this.kind, this.uri,
+      this.last_modified, this.permalink_url, this.id);
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
