@@ -5,9 +5,9 @@ part 'model.g.dart';
 
 typedef bool TrackFilter(Track t);
 
-final DateFormat _dateFormatter = new DateFormat("yyyy/MM/dd HH:MM:ss Z");
-DateTime _fromJson(String date) => _dateFormatter.parse(date);
-String _toJson(DateTime date) => _dateFormatter.format(date);
+final DateFormat _dateFormatter = new DateFormat("yyyy/MM/dd HH:mm:ss Z");
+DateTime _fromJson(String date) =>  _dateFormatter.parse(date);
+String _toJson(DateTime date) => date.toUtc().toIso8601String();
 
 @JsonSerializable()
 class AuthResponse {
@@ -125,6 +125,11 @@ class Track {
   factory Track.fromJson(Map<String, dynamic> json) => _$TrackFromJson(json);
 
   Map<String, dynamic> toJson() => _$TrackToJson(this);
+  
+//  static String toJsonString(List<Track> tracks) {
+//    tracks
+//      .map((Track t) => t.toJson())
+//  }
 }
 
 @JsonSerializable()
