@@ -7,7 +7,7 @@ typedef bool TrackFilter(Track t);
 
 final DateFormat _dateFormatter = new DateFormat("yyyy/MM/dd HH:mm:ss Z");
 
-DateTime _fromJson(String date) => _dateFormatter.parse(date);
+DateTime _fromJson(String date) => _dateFormatter.parse(date).toUtc();
 
 String _toJson(DateTime date) => date.toUtc().toIso8601String();
 
@@ -56,10 +56,11 @@ class Track {
   int comment_count;
   String purchase_title;
   String stream_url;
-  String last_modified;
+  @JsonKey(fromJson: _fromJson, toJson: _toJson)
+  DateTime last_modified;
   User user;
   String genre;
-  bool isrc;
+  String isrc;
   int download_count;
   String permalink_url;
   int playback_count;
@@ -69,12 +70,12 @@ class Track {
   String artwork_url;
   @JsonKey(fromJson: _fromJson, toJson: _toJson)
   DateTime created_at;
-  int bpm;
+  double bpm;
   String uri;
   int original_content_size;
   String key_signature;
   int user_playback_count;
-  int release;
+  String release;
   String tag_list;
   String embeddable_by;
 
@@ -127,7 +128,14 @@ class Track {
       this.tag_list,
       this.embeddable_by);
 
-  factory Track.fromJson(Map<String, dynamic> json) => _$TrackFromJson(json);
+  factory Track.fromJson(Map<String, dynamic> json) {
+    try {
+      return _$TrackFromJson(json);
+    } catch (e) {
+      print(json);
+      throw e;
+    }
+  }
 
   Map<String, dynamic> toJson() => _$TrackToJson(this);
 
@@ -142,7 +150,8 @@ class User {
   String avatar_url;
   String kind;
   String uri;
-  String last_modified;
+  @JsonKey(fromJson: _fromJson, toJson: _toJson)
+  DateTime last_modified;
   String permalink_url;
   int id;
 

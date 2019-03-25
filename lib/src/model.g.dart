@@ -48,12 +48,14 @@ Track _$TrackFromJson(Map<String, dynamic> json) {
       json['comment_count'] as int,
       json['purchase_title'] as String,
       json['stream_url'] as String,
-      json['last_modified'] as String,
+      json['last_modified'] == null
+          ? null
+          : _fromJson(json['last_modified'] as String),
       json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
       json['genre'] as String,
-      json['isrc'] as bool,
+      json['isrc'] as String,
       json['download_count'] as int,
       json['permalink_url'] as String,
       json['playback_count'] as int,
@@ -64,12 +66,12 @@ Track _$TrackFromJson(Map<String, dynamic> json) {
       json['created_at'] == null
           ? null
           : _fromJson(json['created_at'] as String),
-      json['bpm'] as int,
+      (json['bpm'] as num)?.toDouble(),
       json['uri'] as String,
       json['original_content_size'] as int,
       json['key_signature'] as String,
       json['user_playback_count'] as int,
-      json['release'] as int,
+      json['release'] as String,
       json['tag_list'] as String,
       json['embeddable_by'] as String);
 }
@@ -102,7 +104,9 @@ Map<String, dynamic> _$TrackToJson(Track instance) => <String, dynamic>{
       'comment_count': instance.comment_count,
       'purchase_title': instance.purchase_title,
       'stream_url': instance.stream_url,
-      'last_modified': instance.last_modified,
+      'last_modified': instance.last_modified == null
+          ? null
+          : _toJson(instance.last_modified),
       'user': instance.user,
       'genre': instance.genre,
       'isrc': instance.isrc,
@@ -132,7 +136,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
       json['avatar_url'] as String,
       json['kind'] as String,
       json['uri'] as String,
-      json['last_modified'] as String,
+      json['last_modified'] == null
+          ? null
+          : _fromJson(json['last_modified'] as String),
       json['permalink_url'] as String,
       json['id'] as int);
 }
@@ -143,7 +149,9 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'avatar_url': instance.avatar_url,
       'kind': instance.kind,
       'uri': instance.uri,
-      'last_modified': instance.last_modified,
+      'last_modified': instance.last_modified == null
+          ? null
+          : _toJson(instance.last_modified),
       'permalink_url': instance.permalink_url,
       'id': instance.id
     };

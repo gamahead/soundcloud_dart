@@ -38,12 +38,12 @@ class SoundcloudClient {
     }
 
     Map<String, dynamic> queryParams = getClientQueryParamMap();
-    queryParams.addAll({'ids': trackIds.join(",")});
+    queryParams['ids'] = trackIds.join(",");
 
-    Uri tracskUri = Uri.http(host, tracksPath, queryParams);
-
+    Uri tracksUri = Uri.http(host, tracksPath, queryParams);
+    print(tracksUri);
     return http
-        .get(tracskUri)
+        .get(tracksUri)
         .then(_handleTracksResponse)
         .then((List<Track> tracks) => tracks.where(trackFilter).toList());
   }
